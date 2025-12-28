@@ -1,0 +1,33 @@
+# Ignore Word documents (already extracted the data)
+*.docx
+~$*.docx
+
+# Ignore extraction scripts (temporary utilities)
+extract_docx.py
+extract_datasets_doc.py
+
+# Ignore extracted text files (redundant with code)
+requirements.txt
+datasets.txt
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
