@@ -1,0 +1,19 @@
+# ============================================
+# Bioinformatics Toolkit - Dependencies
+# ============================================
+
+# Web Framework
+streamlit>=1.30.0
+
+# Data Visualization
+plotly>=5.18.0
+
+# Data Handling
+pandas>=2.0.0
+
+# ============================================
+# Notes:
+# - Core bioinformatics logic uses Python standard library only
+# - No external bioinformatics packages required (biopython, etc.)
+# - Minimal dependencies for easy deployment
+# ============================================

@@ -1,0 +1,13 @@
+# Bioinformatics Web App - Streamlit Dependencies
+
+# Web Framework
+streamlit>=1.30.0
+
+# Visualization
+plotly>=5.18.0
+
+# Data handling
+pandas>=2.0.0
+
+# Note: The core bioinformatics logic uses only Python standard library
+# No external bioinformatics packages needed (biopython, etc.)

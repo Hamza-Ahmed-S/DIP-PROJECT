@@ -1,33 +1,88 @@
-# Ignore Word documents (already extracted the data)
-*.docx
-~$*.docx
+# ============================================
+# Bioinformatics Toolkit - Git Ignore
+# ============================================
 
-# Ignore extraction scripts (temporary utilities)
-extract_docx.py
-extract_datasets_doc.py
-
-# Ignore extracted text files (redundant with code)
-requirements.txt
-datasets.txt
-
-# Python cache
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.pyc
 
-# Virtual environment
+# Virtual Environments
 venv/
 env/
 ENV/
+.venv/
+.python-version
 
-# IDE
+# IDE & Editors
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
+.project
+.pydevproject
+.settings/
 
-# OS
+# OS Files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 desktop.ini
+
+# Logs & Databases
+*.log
+logs/
+*.sqlite
+*.db
+
+# User Data & Analytics (DO NOT COMMIT)
+data/analytics.json
+data/user_uploads/
+uploads/
+*.csv
+*.xlsx
+
+# Streamlit Secrets
+.streamlit/secrets.toml
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.backup
+~$*
+
+# Documentation Artifacts (generated during development)
+.gemini/
+
+# Ignore extracted text files (redundant with code)
+datasets.txt
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Distribution / packaging
+.Python
+develop-eggs/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+
+# End of file
+
