@@ -207,8 +207,8 @@ This is an educational project, but contributions are welcome!
 
 **Course:** Digital Image Processing using Python  
 **Author:** Hamza Ahmed Siddiqui (Roll No: 22FA-043-SE)  
-**Institution:** [Your University]  
-**Year:** 2024-2025
+**Institution:** UIT University
+**Year:** 2022-2026
 
 ### Learning Outcomes
 - ✅ Python programming & algorithm implementation
@@ -239,9 +239,8 @@ This project is created for educational purposes. Feel free to use it for learni
 
 **Hamza Ahmed Siddiqui**
 
-- 📧 Email: [your.email@example.com]
+- 📧 Email: [hamzaahmedsiddiqui03@gmail.com]
 - 🐙 GitHub: [@Hamza-Ahmed-S](https://github.com/Hamza-Ahmed-S)
-- 💼 LinkedIn: [Your LinkedIn]
 
 ---
 
