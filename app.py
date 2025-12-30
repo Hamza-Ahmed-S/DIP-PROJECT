@@ -134,9 +134,155 @@ st.components.v1.html("""
 </script>
 """, height=0)
 
+# Remove the keyboard_arrow collapse button with ULTRA-AGGRESSIVE JavaScript
+st.components.v1.html("""
+<script>
+    // ULTRA AGGRESSIVE collapse button removal
+    function nukeCollapseButton() {
+        // Method 1: Remove by data-testid
+        const collapseBtn = document.querySelector('[data-testid="collapsedControl"]');
+        if (collapseBtn) {
+            collapseBtn.remove();
+        }
+        
+        // Method 2: Remove any button in sidebar
+        const sidebarButtons = document.querySelectorAll('[data-testid="stSidebar"] button');
+        sidebarButtons.forEach(btn => {
+            if (btn.textContent.includes('keyboard') || 
+                btn.textContent.includes('<<') || 
+                btn.textContent.includes('key') ||
+                btn.getAttribute('aria-label')?.includes('collapse')) {
+                btn.remove();
+            }
+        });
+        
+        // Method 3: Hide any element containing "keyboard" text
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(el => {
+            const text = el.textContent || '';
+            if (text.includes('keyboard') && 
+                el.tagName !== 'A' && 
+                el.tagName !== 'SCRIPT' &&
+                !el.classList.contains('main')) {
+                el.style.display = 'none';
+                el.style.visibility = 'hidden';
+                el.style.opacity = '0';
+                el.style.width = '0';
+                el.style.height = '0';
+                el.remove();
+            }
+        });
+        
+        // Method 4: Target specific classes
+        const badClasses = [
+            '.css-1544g2n',
+            '.css-pkbazv',
+            '[class*="collaps"]',
+            '[class*="Collaps"]'
+        ];
+        badClasses.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => el.remove());
+        });
+    }
+    
+    // Run immediately
+    nukeCollapseButton();
+    
+    // Run multiple times
+    setTimeout(nukeCollapseButton, 50);
+    setTimeout(nukeCollapseButton, 100);
+    setTimeout(nukeCollapseButton, 200);
+    setTimeout(nukeCollapseButton, 500);
+    setTimeout(nukeCollapseButton, 1000);
+    setTimeout(nukeCollapseButton, 2000);
+    
+    // Watch for DOM changes
+    const observer = new MutationObserver(nukeCollapseButton);
+    observer.observe(document.body, { 
+        childList: true, 
+        subtree: true,
+        attributes: true,
+        characterData: true
+    });
+    
+    // Also run on window load
+    window.addEventListener('load', nukeCollapseButton);
+</script>
+""", height=0)
+
 # Custom CSS for stunning eye-catching design
 st.markdown("""
 <style>
+    /* IMMEDIATE HIDE - Before JavaScript runs */
+    [data-testid="collapsedControl"],
+    [data-testid="collapsedControl"] *,
+    button[kind="header"],
+    [class*="collaps"],
+    [class*="Collaps"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        font-size: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        position: absolute !important;
+        left: -99999px !important;
+        color: transparent !important;
+        background: transparent !important;
+    }
+    
+    /* Nuclear option: Hide ALL sidebar header buttons */
+    [data-testid="stSidebar"] > div > div:first-child button {
+        display: none !important;
+        color: transparent !important;
+        font-size: 0 !important;
+    }
+    
+    /* Ultra-nuclear: Make sidebar header area transparent */
+    [data-testid="stSidebar"] > div > div:first-child {
+        color: transparent !important;
+        font-size: 0 !important;
+    }
+    
+    [data-testid="stSidebar"] > div > div:first-child * {
+        color: transparent !important;
+        font-size: 0 !important;
+        display: none !important;
+    }
+    
+    /* Hide Material Icons text fallback */
+    .material-icons,
+    .material-icons-outlined,
+    span[class*="material"] {
+        font-size: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        display: none !important;
+        color: transparent !important;
+    }
+    
+    /* Hide any text that says "keyboard" */
+    [data-testid="stSidebar"] button::before,
+    [data-testid="stSidebar"] button::after {
+        content: "" !important;
+        display: none !important;
+    }
+    
+    /* Make keyboard text transparent */
+    [data-testid="stSidebar"] button,
+    [data-testid="stSidebar"] span {
+        color: rgba(255,255,255,0.95) !important;
+    }
+    
+    /* Override: If it contains "keyboard", make it invisible */
+    button:has-text("keyboard"),
+    span:has-text("keyboard"),
+    *[aria-label*="keyboard"] {
+        color: transparent !important;
+        font-size: 0 !important;
+        display: none !important;
+    }
+    
     /* Import Premium Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Fira+Code:wght@400;500&display=swap');
     
@@ -148,6 +294,34 @@ st.markdown("""
     /* Hide Streamlit Branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    
+    /* Fix keyboard_arrow text issue in sidebar - Multiple approaches */
+    [data-testid="stSidebarNav"] span {
+        font-size: 0 !important;
+    }
+    
+    [data-testid="stSidebarNav"] a span {
+        font-size: 1rem !important;
+    }
+    
+    /* Hide any text containing "keyboard" */
+    *:not(a):not(button):not(input):not(textarea) {
+        text-indent: 0 !important;
+    }
+    
+    /* Target the specific keyboard_arrow element */
+    .css-1544g2n, .css-pkbazv, [class*="keyboard"] {
+        display: none !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        height: 0 !important;
+        font-size: 0 !important;
+    }
+    
+    /* Hide Material Icons text fallback */
+    .material-icons {
+        font-size: 0 !important;
+    }
     
     /* Animated Gradient Background */
     .stApp {
@@ -266,6 +440,11 @@ st.markdown("""
         border: 2px solid rgba(102, 126, 234, 0.2);
         position: relative;
         overflow: hidden;
+        min-height: 140px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     
     .stat-card::before {
@@ -376,15 +555,96 @@ st.markdown("""
         box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
     }
     
-    /* Sidebar with Gradient */
+    /* ============================================
+       SIDEBAR REDESIGN - Bigger & Eye-Catching
+       ============================================ */
+    
+    /* Hide the collapse button (removes keyboard_arrow) */
+    [data-testid="collapsedControl"] {
+        display: none !important;
+    }
+    
+    /* Make sidebar wider */
+    [data-testid="stSidebar"] {
+        width: 350px !important;
+        min-width: 350px !important;
+    }
+    
+    [data-testid="stSidebar"] > div:first-child {
+        width: 350px !important;
+        min-width: 350px !important;
+    }
+    
+    /* Sidebar Background */
     .css-1d391kg, [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+        background: linear-gradient(180deg, rgba(102, 126, 234, 0.98) 0%, rgba(118, 75, 162, 0.98) 100%) !important;
         backdrop-filter: blur(10px);
     }
     
+    /* Sidebar Navigation Container */
+    [data-testid="stSidebarNav"] {
+        padding: 2rem 1rem !important;
+        background: transparent !important;
+    }
+    
+    /* Navigation Links - Make them BIGGER */
+    [data-testid="stSidebarNav"] a {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-radius: 15px !important;
+        padding: 1.2rem 1.5rem !important;
+        margin: 0.8rem 0 !important;
+        font-size: 1.2rem !important;
+        font-weight: 600 !important;
+        color: white !important;
+        text-decoration: none !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        transition: all 0.3s ease !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 1rem !important;
+    }
+    
+    /* Navigation Links Hover */
+    [data-testid="stSidebarNav"] a:hover {
+        background: rgba(255, 255, 255, 0.25) !important;
+        border-color: rgba(255, 255, 255, 0.4) !important;
+        transform: translateX(8px) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    /* Active/Selected Page */
+    [data-testid="stSidebarNav"] a[aria-current="page"] {
+        background: rgba(255, 255, 255, 0.3) !important;
+        border-color: rgba(255, 255, 255, 0.5) !important;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3) !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Make emoji icons bigger */
+    [data-testid="stSidebarNav"] a span:first-child {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Navigation text */
+    [data-testid="stSidebarNav"] a span:last-child {
+        font-size: 1.1rem !important;
+        color: white !important;
+    }
+    
+    /* All sidebar text white */
     .css-1d391kg *, [data-testid="stSidebar"] * {
         color: white !important;
     }
+    
+    /* Sidebar header/title */
+    [data-testid="stSidebar"] h1, 
+    [data-testid="stSidebar"] h2, 
+    [data-testid="stSidebar"] h3 {
+        color: white !important;
+        font-weight: 700 !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+    }
+    
     
     /* Enhanced Metrics */
     [data-testid="stMetricValue"] {
@@ -492,7 +752,7 @@ with col3:
     st.markdown(f"""
     <div class="stat-card">
         <div class="stat-number">{avg_rating:.1f}</div>
-        <div class="stat-label">{stars}<br>Average Rating</div>
+        <div class="stat-label">{stars} Average Rating</div>
     </div>
     """, unsafe_allow_html=True)
 

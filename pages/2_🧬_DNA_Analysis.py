@@ -10,6 +10,10 @@ from analytics import Analytics
 from utils.visualizations import create_pie_chart, create_horizontal_bar_chart, visualize_dna_sequence, visualize_protein_sequence
 from utils.data_loader import get_sample_dna, get_sample_protein, validate_dna_sequence, validate_protein_sequence, clean_sequence
 
+# Apply shared styling
+from utils.shared_styling import apply_common_styling
+apply_common_styling()
+
 # Initialize analytics
 if 'analytics' not in st.session_state:
     st.session_state.analytics = Analytics()
@@ -100,7 +104,7 @@ with tab1:
                 with col2:
                     nucleotide_data = {"A": a_count, "T": t_count, "G": g_count, "C": c_count}
                     fig = create_pie_chart(nucleotide_data, "Nucleotide Distribution")
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, width='stretch')
                 
                 # 2. ORF Detection
                 st.markdown("---")
@@ -222,7 +226,7 @@ with tab2:
                 with col2:
                     if aa_frequencies:
                         fig = create_horizontal_bar_chart(aa_frequencies, "Amino Acid Frequency Distribution")
-                        st.plotly_chart(fig, use_container_width=True)
+                        st.plotly_chart(fig, width='stretch')
                 
                 # 2. Hydrophobic Analysis
                 st.markdown("---")
@@ -252,7 +256,7 @@ with tab2:
                         "Hydrophilic": total_aa - hydrophobic_count
                     }
                     fig = create_pie_chart(hydro_data, "Hydrophobic vs Hydrophilic")
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig, width='stretch')
                 
                 # Interpretation
                 with st.expander("📖 Understanding Amino Acid Properties"):

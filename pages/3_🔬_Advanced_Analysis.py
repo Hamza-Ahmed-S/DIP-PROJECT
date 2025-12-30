@@ -18,6 +18,11 @@ from codon_table import CODON_TABLE
 if 'analytics' not in st.session_state:
     st.session_state.analytics = Analytics()
 
+
+# Apply shared styling
+from utils.shared_styling import apply_common_styling
+apply_common_styling()
+
 st.set_page_config(page_title="Advanced Analysis", page_icon="🔬", layout="wide")
 
 # Header

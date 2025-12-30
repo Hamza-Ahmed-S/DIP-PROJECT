@@ -12,6 +12,11 @@ from datetime import datetime
 if 'analytics' not in st.session_state:
     st.session_state.analytics = Analytics()
 
+
+# Apply shared styling
+from utils.shared_styling import apply_common_styling
+apply_common_styling()
+
 st.set_page_config(page_title="Analytics Dashboard", page_icon="📈", layout="wide")
 
 # Header
@@ -63,7 +68,7 @@ if any(usage_data.values()):
             "Feature",
             "Number of Analyses"
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col2:
         st.markdown("### Most Popular")
@@ -94,7 +99,7 @@ if all_ratings:
     with col1:
         fig = create_rating_distribution_chart(all_ratings)
         if fig:
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width='stretch')
     
     with col2:
         st.markdown("### Rating Statistics")

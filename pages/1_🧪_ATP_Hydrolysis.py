@@ -12,6 +12,11 @@ from utils.visualizations import create_bar_chart
 # Add parent directory to path to import requirement1
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
+# Apply shared styling
+from utils.shared_styling import apply_common_styling
+apply_common_styling()
+
+
 # Initialize analytics
 if 'analytics' not in st.session_state:
     st.session_state.analytics = Analytics()
@@ -161,7 +166,7 @@ if st.button("🧮 Calculate ΔG for All Tissues", type="primary"):
     st.markdown("### 📊 Comparison Chart")
     chart_data = {tissue: data['ΔG (kJ/mol)'] for tissue, data in results.items()}
     fig = create_bar_chart(chart_data, "Gibbs Free Energy by Tissue", "Tissue Type", "ΔG (kJ/mol)")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
     
     # Interpretation
     with st.expander("📖 Understanding the Results"):

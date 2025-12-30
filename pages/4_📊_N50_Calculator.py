@@ -12,6 +12,11 @@ from utils.data_loader import get_sample_contigs, parse_contig_lengths
 if 'analytics' not in st.session_state:
     st.session_state.analytics = Analytics()
 
+
+# Apply shared styling
+from utils.shared_styling import apply_common_styling
+apply_common_styling()
+
 st.set_page_config(page_title="N50 Calculator", page_icon="📊", layout="wide")
 
 # Header
@@ -203,7 +208,7 @@ if st.button("📊 Calculate N50/N90 Statistics", type="primary", key="calc_n50"
             marker=dict(size=15, color='orange', symbol='diamond')
         ))
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         # Contig length distribution
         st.markdown("### 📊 Contig Length Distribution")
@@ -217,7 +222,7 @@ if st.button("📊 Calculate N50/N90 Statistics", type="primary", key="calc_n50"
         }
         
         fig2 = create_bar_chart(ranges, "Contig Size Distribution", "Size Range", "Number of Contigs")
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width='stretch')
         
         # Contig table
         with st.expander("📋 View All Contigs"):
